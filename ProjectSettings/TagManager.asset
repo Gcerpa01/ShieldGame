@@ -41,11 +41,11 @@ TagManager:
   - name: Background
     uniqueID: 3469575629
     locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Terrain Background
     uniqueID: 2197237163
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Terrain
     uniqueID: 2644678223
