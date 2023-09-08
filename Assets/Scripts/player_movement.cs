@@ -7,10 +7,15 @@ public class player_movement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer playerSprite;
+    private BoxCollider2D coll;
 
     float xDir;
     [SerializeField] private float movementSpeed = 12f;
     [SerializeField] private float jumpDistance = 10f;
+
+    [SerializeField] private LayerMask jumpGround;
+
+    private enum MovementState {idle,running,jumping,falling};
 
     // Start is called before the first frame update
     private void Start()
@@ -18,6 +23,7 @@ public class player_movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerSprite = GetComponent<SpriteRenderer>();
+        coll = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -27,7 +33,7 @@ public class player_movement : MonoBehaviour
 
         rb.velocity = new Vector2(xDir * movementSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpDistance);
         }
@@ -36,17 +42,31 @@ public class player_movement : MonoBehaviour
 
     private void changeAnimation()
     {
+        MovementState state;
+
         if (xDir > 0)
         {
-            anim.SetBool("isRunning", true);
+            state = MovementState.running;
             playerSprite.flipX = false;
         }
         else if (xDir < 0)
         {
-            anim.SetBool("isRunning", true);
+            state = MovementState.running;
             playerSprite.flipX = true;
         }
 
-        else anim.SetBool("isRunning", false);
+        else state = MovementState.idle;
+
+
+        if(rb.velocity.y > .1f){
+            state = MovementState.jumping;
+        }
+        else if (rb.velocity.y < -.1f) state = MovementState.falling;
+
+        anim.SetInteger("actionState",(int)state);
+    }
+
+    private bool isGrounded(){
+        return Physics2D.BoxCast(coll.bounds.center,coll.bounds.size,0f,Vector2.down,.1f,jumpGround);
     }
 }
