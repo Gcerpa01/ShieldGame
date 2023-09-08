@@ -309,7 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0993827530244ff2b91a84598214acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchPoint: {fileID: 0}
+  launchPoint: {fileID: 1272016229}
+  shieldPrefab: {fileID: 5516256074436324483, guid: 3d283dbb065de400ab6b6a130b32aee7, type: 3}
 --- !u!1 &306760934
 GameObject:
   m_ObjectHideFlags: 0

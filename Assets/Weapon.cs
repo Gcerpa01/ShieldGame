@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public Transform launchPoint;
+    public GameObject shieldPrefab;
 
     // Update is called once per frame
     void Update()
@@ -13,6 +14,6 @@ public class Weapon : MonoBehaviour
     }
 
     void throwShield(){
-        
+        Instantiate(shieldPrefab,launchPoint.position,launchPoint.rotation);
     }
 }
