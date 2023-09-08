@@ -6,7 +6,7 @@ public class player_movement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
-    private SpriteRenderer playerSprite;
+    // private SpriteRenderer playerSprite;
     private BoxCollider2D coll;
 
     float xDir;
@@ -22,7 +22,7 @@ public class player_movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        playerSprite = GetComponent<SpriteRenderer>();
+        // playerSprite = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
     }
 
@@ -47,12 +47,12 @@ public class player_movement : MonoBehaviour
         if (xDir > 0)
         {
             state = MovementState.running;
-            playerSprite.flipX = false;
+            transform.localScale = new Vector3(1,1,1);
         }
         else if (xDir < 0)
         {
             state = MovementState.running;
-            playerSprite.flipX = true;
+            transform.localScale = new Vector3(-1,1,1);
         }
 
         else state = MovementState.idle;
