@@ -9,7 +9,8 @@ public class player_movement : MonoBehaviour
     // private SpriteRenderer playerSprite;
     private BoxCollider2D coll;
 
-    float xDir;
+    public float xDir;
+    private bool faceDir = true;
     [SerializeField] private float movementSpeed = 12f;
     [SerializeField] private float jumpDistance = 10f;
 
@@ -47,12 +48,14 @@ public class player_movement : MonoBehaviour
         if (xDir > 0)
         {
             state = MovementState.running;
-            transform.localScale = new Vector3(1,1,1);
+            if (!faceDir) Flip();
+            // transform.localScale = new Vector3(1,1,1);
         }
         else if (xDir < 0)
         {
             state = MovementState.running;
-            transform.localScale = new Vector3(-1,1,1);
+            if (faceDir) Flip();
+            // transform.localScale = new Vector3(-1,1,1);
         }
 
         else state = MovementState.idle;
@@ -64,6 +67,11 @@ public class player_movement : MonoBehaviour
         else if (rb.velocity.y < -.1f) state = MovementState.falling;
 
         anim.SetInteger("actionState",(int)state);
+    }
+
+    private void Flip(){
+        faceDir = !faceDir;
+        transform.Rotate(0,180,0);
     }
 
     private bool isGrounded(){

@@ -8,12 +8,12 @@ public class shieldLogic : MonoBehaviour
     public Rigidbody2D rb;
     private enum MovementState {thrown, stop, release};
     MovementState shieldState = MovementState.thrown;
-
+    private player_movement playerMovement;
     void Start()
     {
-        // playerMovement = GetComponent<player_movement>();
+        // playerMovement = FindObjectOfType<player_movement>();
         
-        // rb.velocity = playerMovement.IsFacingRight? transform.right * speed : transform.right * speed * -1;
+        // Vector2 launchDirection = playerMovement.IsFacingRight() ? Vector2.right : Vector2.left;
         rb.velocity = transform.right * speed;
     }
 
