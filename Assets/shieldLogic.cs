@@ -9,6 +9,11 @@ public class shieldLogic : MonoBehaviour
     private enum MovementState {thrown, stop, release};
     MovementState shieldState = MovementState.thrown;
     private player_movement playerMovement;
+
+    public GameObject platformPrefab;
+    private GameObject currentPlatform;
+    private Vector3 platformLocation;
+
     void Start()
     {
         // playerMovement = FindObjectOfType<player_movement>();
@@ -27,11 +32,17 @@ public class shieldLogic : MonoBehaviour
                 case MovementState.thrown:
                     rb.velocity = Vector2.zero;
                     shieldState = MovementState.stop;
+                    platformLocation = transform.position; 
+                    makePlatform();
+                    Destroy(gameObject);
                     break;
                 case MovementState.stop:
-                    Destroy(gameObject);
                     break;
             }
         }
+    }
+
+    void makePlatform(){
+        currentPlatform = Instantiate(platformPrefab,platformLocation,Quaternion.identity);
     }
 }
