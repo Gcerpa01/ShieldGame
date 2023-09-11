@@ -10,12 +10,17 @@ public class Weapon : MonoBehaviour
     private enum MovementState {thrown,stop,release};
     
     MovementState shieldState = MovementState.thrown;
+    private player_movement playerMovement;
+
+    void Start(){
+        playerMovement = FindObjectOfType<player_movement>();
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) {
-            throwShield();
-        }
+        if (Input.GetButtonDown("Fire1") && playerMovement.isGrounded()) throwShield();
+        
+        else if(Input.GetButtonDown("Fire1") && shieldState != MovementState.thrown) throwShield();
 
     }
 

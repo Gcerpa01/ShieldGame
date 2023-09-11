@@ -74,7 +74,7 @@ public class player_movement : MonoBehaviour
         transform.Rotate(0,180,0);
     }
 
-    private bool isGrounded(){
+    public bool isGrounded(){
         return Physics2D.BoxCast(coll.bounds.center,coll.bounds.size,0f,Vector2.down,.1f,jumpGround);
     }
 }

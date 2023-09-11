@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class shieldLogic : MonoBehaviour
 {
-    public float speed = 13.8f;
+    public float speed = 15f;
     public Rigidbody2D rb;
     private enum MovementState {thrown, stop, release};
     MovementState shieldState = MovementState.thrown;
