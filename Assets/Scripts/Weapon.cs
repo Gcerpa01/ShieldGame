@@ -49,7 +49,7 @@ public class Weapon : MonoBehaviour
                     shieldManager.SetShieldState(ShieldManager.MovementState.thrown); // Update the state through the ShieldManager
                     Debug.Log("Weapon updated to thrown");
                 }
-                else Debug.Log("Weapon on cooldown. Can not be thrown yet");
+                else Debug.Log("Weapon can not be thrown yet");
                 break;
             case ShieldManager.MovementState.thrown:
                 shieldManager.SetShieldState(ShieldManager.MovementState.stop); // Update the state through the ShieldManager

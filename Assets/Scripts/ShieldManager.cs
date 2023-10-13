@@ -22,9 +22,9 @@ public class ShieldManager : MonoBehaviour
         if(shieldState == MovementState.idle) updateThrowTime(); //cooldown
     }
 
-    //check if cooldown is met
+    //check if cooldown is met and character is not blocking
     public bool canThrow(){
-        return Time.time > nextThrow;
+        return (Time.time > nextThrow) && !isBlocking; 
     }
 
     //check if can block
