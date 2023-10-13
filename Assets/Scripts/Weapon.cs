@@ -34,10 +34,13 @@ public class Weapon : MonoBehaviour
         switch (shieldManager.GetShieldState()) // Use the ShieldManager to get the state
         {
             case ShieldManager.MovementState.idle:
-                // Instantiate the shield.
-                Instantiate(shieldPrefab, launchPoint.position, launchPoint.rotation);
-                shieldManager.SetShieldState(ShieldManager.MovementState.thrown); // Update the state through the ShieldManager
-                Debug.Log("Weapon updated to thrown");
+                if(shieldManager.canThrow()){
+                    // Instantiate the shield.
+                    Instantiate(shieldPrefab, launchPoint.position, launchPoint.rotation);
+                    shieldManager.SetShieldState(ShieldManager.MovementState.thrown); // Update the state through the ShieldManager
+                    Debug.Log("Weapon updated to thrown");
+                }
+                else Debug.Log("Weapon on cooldown. Can not be thrown yet");
                 break;
             case ShieldManager.MovementState.thrown:
                 shieldManager.SetShieldState(ShieldManager.MovementState.stop); // Update the state through the ShieldManager

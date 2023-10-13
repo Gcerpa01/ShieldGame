@@ -11,6 +11,7 @@ public class player_movement : MonoBehaviour
     private float xDir;
     private bool faceDir = true;
     private bool hasJumped = false;
+    
 
     [SerializeField] private float movementSpeed = 12f;
     [SerializeField] private float jumpForce = 10f;
@@ -19,11 +20,14 @@ public class player_movement : MonoBehaviour
     private enum MovementState { Idle, Running, Jumping, Falling };
     private MovementState currentState;
 
+    private ShieldManager shieldManager; // Reference to the ShieldManager script
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
+        shieldManager = FindObjectOfType<ShieldManager>(); // Find the ShieldManager in the scene
     }
 
     private void Update()
@@ -42,7 +46,7 @@ public class player_movement : MonoBehaviour
     {
         rb.velocity = new Vector2(xDir * movementSpeed, rb.velocity.y);
 
-        if (hasJumped && isGrounded())
+        if (hasJumped && isGrounded() && shieldManager.GetShieldState() != ShieldManager.MovementState.thrown)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             hasJumped = false;
@@ -94,4 +98,5 @@ public class player_movement : MonoBehaviour
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpGround);
     }
+
 }

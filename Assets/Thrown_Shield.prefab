@@ -142,6 +142,9 @@ MonoBehaviour:
   terrain:
     serializedVersion: 2
     m_Bits: 64
+  player:
+    serializedVersion: 2
+    m_Bits: 128
   enemies:
     serializedVersion: 2
     m_Bits: 64

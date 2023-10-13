@@ -14,9 +14,13 @@ public class shieldLogic : MonoBehaviour
 
     private CircleCollider2D coll;
     [SerializeField] private LayerMask terrain;
+    [SerializeField] private LayerMask player;
     [SerializeField] private LayerMask enemies;
 
+
+    private bool returnShield = false;
     private ShieldManager shieldManager; // Reference to the ShieldManager script
+    
 
     void Start()
     {
@@ -28,12 +32,8 @@ public class shieldLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CheckCollision()){
-            Destroy(gameObject);
-            shieldManager.SetShieldState(ShieldManager.MovementState.idle);
-            Debug.Log("Collision encounterd");
-        }
-        else if(!CheckCollision() && Input.GetButtonDown("Fire1")){
+
+        if(Input.GetButtonDown("Fire1")){
             switch (shieldManager.GetShieldState()) // Use the ShieldManager to get the state
             {   
                 case ShieldManager.MovementState.stop:
@@ -44,6 +44,20 @@ public class shieldLogic : MonoBehaviour
                     break;
             }
 
+        }
+
+        else if(returnShield){
+            rb.velocity = -transform.right * speed; // move back towards player
+            if(CheckPlayerReturn()){
+                Destroy(gameObject);
+                shieldManager.SetShieldState(ShieldManager.MovementState.idle);
+                Debug.Log("Shield returned");
+                returnShield = false;
+            } 
+        }
+        else if(CheckCollision()){
+            Debug.Log("Collision encounterd");
+            returnShield = true;
         }
 
     }
@@ -57,4 +71,9 @@ public class shieldLogic : MonoBehaviour
     {
         return Physics2D.CircleCast(transform.position, coll.radius/2, Vector2.right, 0.01f, terrain);
     }
+
+    bool CheckPlayerReturn(){
+        return Physics2D.CircleCast(transform.position, coll.radius/2, Vector2.left, 0.01f, player);
+    }
+
 }
