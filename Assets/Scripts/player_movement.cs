@@ -11,8 +11,6 @@ public class player_movement : MonoBehaviour
     private float xDir;
     private bool faceDir = true;
     private bool hasJumped = false;
-    
-
     [SerializeField] private float movementSpeed = 12f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private LayerMask jumpGround;
@@ -44,13 +42,14 @@ public class player_movement : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = new Vector2(xDir * movementSpeed, rb.velocity.y);
+        if(shieldManager.GetBlockingState()) rb.velocity = new Vector2(xDir * movementSpeed/2, rb.velocity.y);
+        else rb.velocity = new Vector2(xDir * movementSpeed, rb.velocity.y);
 
         if (hasJumped && isGrounded() && shieldManager.GetShieldState() != ShieldManager.MovementState.thrown)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             hasJumped = false;
-        }
+        }    
     }
 
     private void changeAnimation()
@@ -98,5 +97,6 @@ public class player_movement : MonoBehaviour
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpGround);
     }
+
 
 }

@@ -9,24 +9,42 @@ public class ShieldManager : MonoBehaviour
 
     private float nextThrow;
     private float cooldown = 0.3f;
+    private bool isBlocking = false;
 
     public MovementState GetShieldState()
     {
         return shieldState;
     }
 
-    public void SetShieldState(MovementState newState)
+    public void SetShieldState(MovementState newState) 
     {
         shieldState = newState;
-        if(shieldState == MovementState.idle) updateThrowTime();
+        if(shieldState == MovementState.idle) updateThrowTime(); //cooldown
     }
 
+    //check if cooldown is met
     public bool canThrow(){
         return Time.time > nextThrow;
     }
 
+    //check if can block
+    public bool canBlock(){
+        return shieldState == MovementState.idle;
+    }
+    
+
+    //update cooldown
     private void updateThrowTime(){
         nextThrow = Time.time + cooldown;
     }
+
+    public void setBlocking(bool newState){
+        isBlocking = newState;
+    }
+
+    public bool GetBlockingState(){
+        return isBlocking;
+    } 
+    
 }
 

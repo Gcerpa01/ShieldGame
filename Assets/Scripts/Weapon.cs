@@ -27,6 +27,15 @@ public class Weapon : MonoBehaviour
         {
             throwShield();
         }
+
+        else if (Input.GetButtonDown("Fire2") && shieldManager.canBlock() && playerMovement.isGrounded()){
+            shieldManager.setBlocking(true);
+            Debug.Log("Blocking");
+        }
+        else if (Input.GetButtonUp("Fire2")) {
+            Debug.Log("Stopped Blocking");
+            shieldManager.setBlocking(false);
+        }
     }
 
     void throwShield()
@@ -52,4 +61,6 @@ public class Weapon : MonoBehaviour
                 break;
         }
     }
+
+
 }
