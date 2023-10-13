@@ -6,75 +6,92 @@ public class player_movement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
-    // private SpriteRenderer playerSprite;
     private BoxCollider2D coll;
 
-    public float xDir;
+    private float xDir;
     private bool faceDir = true;
-    [SerializeField] private float movementSpeed = 12f;
-    [SerializeField] private float jumpDistance = 10f;
+    private bool hasJumped = false;
 
+    [SerializeField] private float movementSpeed = 12f;
+    [SerializeField] private float jumpForce = 10f;
     [SerializeField] private LayerMask jumpGround;
 
-    private enum MovementState {idle,running,jumping,falling};
+    private enum MovementState { Idle, Running, Jumping, Falling };
+    private MovementState currentState;
 
-    // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        // playerSprite = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         xDir = Input.GetAxisRaw("Horizontal");
+        if(Input.GetButtonDown("Jump")) hasJumped = true;
+    }
 
+    private void FixedUpdate()
+    {
+        Move();
+        changeAnimation();
+    }
+
+    private void Move()
+    {
         rb.velocity = new Vector2(xDir * movementSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        if (hasJumped && isGrounded())
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpDistance);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            hasJumped = false;
         }
-        changeAnimation();
     }
 
     private void changeAnimation()
     {
-        MovementState state;
+        MovementState newState;
 
         if (xDir > 0)
         {
-            state = MovementState.running;
+            newState = MovementState.Running;
             if (!faceDir) Flip();
-            // transform.localScale = new Vector3(1,1,1);
         }
         else if (xDir < 0)
         {
-            state = MovementState.running;
+            newState = MovementState.Running;
             if (faceDir) Flip();
-            // transform.localScale = new Vector3(-1,1,1);
+        }
+        else
+        {
+            newState = MovementState.Idle;
         }
 
-        else state = MovementState.idle;
-
-
-        if(rb.velocity.y > .1f){
-            state = MovementState.jumping;
+        if (rb.velocity.y > 0.1f)
+        {
+            newState = MovementState.Jumping;
         }
-        else if (rb.velocity.y < -.1f) state = MovementState.falling;
+        else if (rb.velocity.y < -0.1f)
+        {
+            newState = MovementState.Falling;
+        }
 
-        anim.SetInteger("actionState",(int)state);
+        if (newState != currentState)
+        {
+            anim.SetInteger("actionState", (int)newState);
+            currentState = newState;
+        }
     }
 
-    private void Flip(){
+    private void Flip()
+    {
         faceDir = !faceDir;
-        transform.Rotate(0,180,0);
+        transform.Rotate(0, 180, 0);
     }
 
-    public bool isGrounded(){
-        return Physics2D.BoxCast(coll.bounds.center,coll.bounds.size,0f,Vector2.down,.1f,jumpGround);
+    public bool isGrounded()
+    {
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpGround);
     }
 }
