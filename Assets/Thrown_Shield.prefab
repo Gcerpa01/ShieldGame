@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7721282663555171091}
   m_Layer: 0
   m_Name: Thrown_Shield
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!58 &4979521471524132705
 CircleCollider2D:
@@ -144,7 +144,10 @@ MonoBehaviour:
     m_Bits: 64
   player:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   enemies:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  switches:
+    serializedVersion: 2
+    m_Bits: 128

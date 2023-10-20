@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class shieldLogic : MonoBehaviour
 {
-    public float speed = 15f;
-    public Rigidbody2D rb;
-    private player_movement playerMovement;
 
-    public GameObject platformPrefab;
+    private player_movement playerMovement;
     private GameObject currentPlatform;
     private Vector3 platformLocation;
 
     private CircleCollider2D coll;
+
+    [Header("Shield Specs")]
+    public float speed = 15f;
+    public Rigidbody2D rb;
+    public GameObject platformPrefab;
+    
+
+
+
+    [Header("Layer Masks")]
     [SerializeField] private LayerMask terrain;
     [SerializeField] private LayerMask player;
     [SerializeField] private LayerMask enemies;
+    [SerializeField] private LayerMask switches;
 
 
     private bool returnShield = false;
@@ -55,7 +63,7 @@ public class shieldLogic : MonoBehaviour
                 returnShield = false;
             } 
         }
-        else if(CheckCollision()){
+        else if(CheckCollisions()){
             Debug.Log("Collision encounterd");
             returnShield = true;
         }
@@ -67,9 +75,21 @@ public class shieldLogic : MonoBehaviour
         currentPlatform = Instantiate(platformPrefab, platformLocation, Quaternion.identity);
     }
 
-    bool CheckCollision()
+    bool CheckTerrainCollision()
     {
         return Physics2D.CircleCast(transform.position, coll.radius/2, Vector2.right, 0.01f, terrain);
+    }
+
+    bool CheckSwitchCollision(){
+        return Physics2D.CircleCast(transform.position, coll.radius/2, Vector2.right, 0.01f, switches);
+    }
+
+    bool CheckEnemyCollision(){
+        return Physics2D.CircleCast(transform.position, coll.radius/2, Vector2.right, 0.01f, enemies);
+    }
+
+    bool CheckCollisions(){
+        return CheckSwitchCollision() || CheckTerrainCollision() || CheckEnemyCollision();
     }
 
     bool CheckPlayerReturn(){

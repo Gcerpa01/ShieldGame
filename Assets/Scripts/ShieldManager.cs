@@ -8,7 +8,8 @@ public class ShieldManager : MonoBehaviour
     private MovementState shieldState = MovementState.idle;
 
     private float nextThrow;
-    private float cooldown = 0.3f;
+    [Header("Shield Cooldown")]
+    [SerializeField] private float cooldown = 0.3f;
     private bool isBlocking = false;
 
     public MovementState GetShieldState()

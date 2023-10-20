@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Shield Stats")]
     public Transform launchPoint;
     public GameObject shieldPrefab;
-
+    
     private player_movement playerMovement;
     private ShieldManager shieldManager; // Reference to the ShieldManager script
 
