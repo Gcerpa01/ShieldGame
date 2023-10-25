@@ -27,6 +27,7 @@ public class EnemyProjectile : EnemyDamage
     {
         if (hit) return;
         float movementSpeed = speed * Time.deltaTime;
+        
         transform.Translate(movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
@@ -37,12 +38,13 @@ public class EnemyProjectile : EnemyDamage
     private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
-        base.OnTriggerEnter2D(collision); //Execute logic from parent script first
+        base.OnTriggerEnter2D(collision);
         coll.enabled = false;
-        gameObject.SetActive(false); //When this hits any object deactivate arrow
+        gameObject.SetActive(false); 
     }
     private void Deactivate()
     {
         gameObject.SetActive(false);
     }
+
 }

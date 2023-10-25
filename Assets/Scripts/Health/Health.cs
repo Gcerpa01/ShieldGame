@@ -6,7 +6,11 @@ public class Health : MonoBehaviour
 {
     [Header("Health Stats")]
     [SerializeField] private float startHealth;
-    
+
+
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
+
     private float curr_Health;
     private bool dead;
 
@@ -19,7 +23,9 @@ public class Health : MonoBehaviour
 
         
         if(!dead && curr_Health == 0){
-            GetComponent<player_movement>().enabled = false;
+
+            foreach(Behaviour component in components) component.enabled = false;
+            
             dead = true;
         }
 

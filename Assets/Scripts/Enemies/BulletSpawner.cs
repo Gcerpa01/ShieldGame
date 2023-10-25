@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class BullerSpawner : MonoBehaviour
+public class BulletSpawner : MonoBehaviour
 {
   [SerializeField] private Transform enemy;
 

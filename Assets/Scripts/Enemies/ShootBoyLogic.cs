@@ -9,9 +9,9 @@ public class ShootBoyLogic : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private int damage;
     
-    // [Header("Bullet Attack")]
-    // [SerializeField] private Transform firepoint;
-    // [SerializeField] private GameObject[] bullets;
+    [Header("Bullet Attack")]
+    [SerializeField] private Transform firepoint;
+    [SerializeField] private GameObject[] bullets;
 
     [Header("Collider Info")]
     [SerializeField] private float colliderDistance;
@@ -94,18 +94,17 @@ public class ShootBoyLogic : MonoBehaviour
     }
 
 
+    private void bulletAttack(){
+        cooldown_timer = 0;
+        bullets[FindBullet()].transform.position = firepoint.position;
+        bullets[FindBullet()].GetComponent<EnemyProjectile>().ActivateProjectile();
+    }
 
-    // private void bulletAttack(){
-    //     cooldown_timer = 0;
-    //     bullets[FindBullet()].transform.position = firepoint.position;
-    //     bullets[FindBullet()].GetComponent<EnemyProjectile>().ActivateProjectile();
-    // }
-
-    // private int FindBullet(){
-    //     for(int i = 0; i < bullets.Length; i++){
-    //         if(!bullets[i].activeInHierarchy) return i;
-    //     }
-    //     return 0;
-    // }
+    private int FindBullet(){
+        for(int i = 0; i < bullets.Length; i++){
+            if(!bullets[i].activeInHierarchy) return i;
+        }
+        return 0;
+    }
     
 }
