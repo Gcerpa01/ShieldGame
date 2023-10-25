@@ -31,10 +31,10 @@ public class Weapon : MonoBehaviour
 
         else if (Input.GetButtonDown("Fire2") && shieldManager.canBlock() && playerMovement.isGrounded()){
             shieldManager.setBlocking(true);
-            Debug.Log("Blocking");
+            // Debug.Log("Blocking");
         }
         else if (Input.GetButtonUp("Fire2")) {
-            Debug.Log("Stopped Blocking");
+            // Debug.Log("Stopped Blocking");
             shieldManager.setBlocking(false);
         }
     }
@@ -48,16 +48,16 @@ public class Weapon : MonoBehaviour
                     // Instantiate the shield.
                     Instantiate(shieldPrefab, launchPoint.position, launchPoint.rotation);
                     shieldManager.SetShieldState(ShieldManager.MovementState.thrown); // Update the state through the ShieldManager
-                    Debug.Log("Weapon updated to thrown");
+                    // Debug.Log("Weapon updated to thrown");
                 }
                 else Debug.Log("Weapon can not be thrown yet");
                 break;
             case ShieldManager.MovementState.thrown:
                 shieldManager.SetShieldState(ShieldManager.MovementState.stop); // Update the state through the ShieldManager
-                Debug.Log("Weapon updated to stopped");
+                // Debug.Log("Weapon updated to stopped");
                 break;
             case ShieldManager.MovementState.stop:
-                Debug.Log("Weapon updated to idle");
+                // Debug.Log("Weapon updated to idle");
                 shieldManager.SetShieldState(ShieldManager.MovementState.idle); // Update the state through the ShieldManager
                 break;
         }

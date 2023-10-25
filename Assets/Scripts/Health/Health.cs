@@ -25,7 +25,6 @@ public class Health : MonoBehaviour
         if(!dead && curr_Health == 0){
 
             foreach(Behaviour component in components) component.enabled = false;
-            
             dead = true;
         }
 

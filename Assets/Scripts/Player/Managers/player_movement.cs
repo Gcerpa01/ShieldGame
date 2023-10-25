@@ -18,7 +18,7 @@ public class player_movement : MonoBehaviour
     private enum MovementState { Idle, Running, Jumping, Falling };
     private MovementState currentState;
 
-    private ShieldManager shieldManager; // Reference to the ShieldManager script
+    public ShieldManager shieldManager; // Reference to the ShieldManager script
 
     private void Start()
     {

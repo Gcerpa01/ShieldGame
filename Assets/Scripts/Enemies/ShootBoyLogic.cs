@@ -17,8 +17,9 @@ public class ShootBoyLogic : MonoBehaviour
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
 
-    [Header("Player Layer")]
+    [Header("Hit Layer")]
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask enemyLayer;
     private float cooldown_timer = Mathf.Infinity;
 
 

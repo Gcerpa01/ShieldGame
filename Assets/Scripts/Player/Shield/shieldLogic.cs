@@ -59,12 +59,12 @@ public class shieldLogic : MonoBehaviour
             if(CheckPlayerReturn()){
                 Destroy(gameObject);
                 shieldManager.SetShieldState(ShieldManager.MovementState.idle);
-                Debug.Log("Shield returned");
+                // Debug.Log("Shield returned");
                 returnShield = false;
             } 
         }
         else if(CheckCollisions()){
-            Debug.Log("Collision encounterd");
+            // Debug.Log("Collision encounterd");
             returnShield = true;
         }
 
