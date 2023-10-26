@@ -37,6 +37,20 @@ AnimationClip:
       value: {fileID: 12115753, guid: c80e57369090d492383f51317d12ffdf, type: 3}
     - time: 0.6666667
       value: {fileID: 12115753, guid: c80e57369090d492383f51317d12ffdf, type: 3}
+    - time: 0.75
+      value: {fileID: 864443382, guid: d6f14e674f2f54f5ab7cecee134871b1, type: 3}
+    - time: 0.8333333
+      value: {fileID: -305851981, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - time: 0.9166667
+      value: {fileID: 1152425430, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - time: 1
+      value: {fileID: 2012440666, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - time: 1.0833334
+      value: {fileID: 560017082, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - time: 1.1666666
+      value: {fileID: 0}
+    - time: 1.25
+      value: {fileID: 0}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -65,12 +79,19 @@ AnimationClip:
     - {fileID: -887479242, guid: c80e57369090d492383f51317d12ffdf, type: 3}
     - {fileID: 12115753, guid: c80e57369090d492383f51317d12ffdf, type: 3}
     - {fileID: 12115753, guid: c80e57369090d492383f51317d12ffdf, type: 3}
+    - {fileID: 864443382, guid: d6f14e674f2f54f5ab7cecee134871b1, type: 3}
+    - {fileID: -305851981, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - {fileID: 1152425430, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - {fileID: 2012440666, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - {fileID: 560017082, guid: b115f94c0ef5b48048e0634e1cdb710e, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 1.2666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -90,8 +111,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5833333
-    functionName: 
+  - time: 1.0833334
+    functionName: DeactivateEnemyCollider
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

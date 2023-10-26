@@ -8,11 +8,12 @@ TagManager:
   - Switches
   - Shoot Boy
   - Enemy
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - DeathBox
   - Water
   - UI
   - Ground
@@ -44,6 +45,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 3469575629
+    locked: 0
+  - name: DeathPits
+    uniqueID: 2829873353
     locked: 0
   - name: Terrain Background
     uniqueID: 2197237163

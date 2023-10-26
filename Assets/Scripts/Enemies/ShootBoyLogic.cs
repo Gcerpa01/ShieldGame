@@ -78,7 +78,6 @@ public class ShootBoyLogic : MonoBehaviour
 
     }
 
-
     private bool PlayerNearby(){
         RaycastHit2D hit = 
             Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
@@ -108,4 +107,12 @@ public class ShootBoyLogic : MonoBehaviour
         return 0;
     }
     
+    private void DeactivateEnemyCollider(){
+        boxCollider.enabled = false;
+    }
+
+    private void ActivateEnemyCollider(){
+        boxCollider.enabled = true;
+    }
+
 }
