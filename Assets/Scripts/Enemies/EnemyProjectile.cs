@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyProjectile : EnemyDamage
 {
+    [Header("Projectile Stats")]
     [SerializeField] private float speed;
     [SerializeField] private float resetTime;
     [SerializeField] private float reflectSpeed;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwitchLogic : MonoBehaviour
 {
+    [Header("Sprites")]
     public Sprite newSprite;
     private Sprite originalSprite;
     public bool clicked = false;

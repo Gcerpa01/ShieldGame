@@ -27,14 +27,14 @@ public class shieldLogic : MonoBehaviour
 
 
     private bool returnShield = false;
-    private ShieldManager shieldManager; // Reference to the ShieldManager script
+    private ShieldManager shieldManager;
     
 
     void Start()
     {
         rb.velocity = transform.right * speed;
         coll = GetComponent<CircleCollider2D>();
-        shieldManager = FindObjectOfType<ShieldManager>(); // Find the ShieldManager in the scene
+        shieldManager = FindObjectOfType<ShieldManager>(); 
     }
 
     // Update is called once per frame

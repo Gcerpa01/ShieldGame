@@ -9,48 +9,66 @@ public class player_movement : MonoBehaviour
     private BoxCollider2D coll;
 
     private float xDir;
+    private float yDir;
     private bool faceDir = true;
     private bool hasJumped = false;
+    private bool GodMode = false;
+    
+    [Header("Player Stats")]
     [SerializeField] private float movementSpeed = 12f;
     [SerializeField] private float jumpForce = 10f;
+
+    [Header("Components")]
     [SerializeField] private LayerMask jumpGround;
 
     private enum MovementState { Idle, Running, Jumping, Falling };
     private MovementState currentState;
 
-    public ShieldManager shieldManager; // Reference to the ShieldManager script
+    public ShieldManager shieldManager; 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
-        shieldManager = FindObjectOfType<ShieldManager>(); // Find the ShieldManager in the scene
+        shieldManager = FindObjectOfType<ShieldManager>(); 
     }
 
     private void Update()
     {
         xDir = Input.GetAxisRaw("Horizontal");
-        if(Input.GetButtonDown("Jump")) hasJumped = true;
+        yDir = Input.GetAxisRaw("Vertical");
+        if (Input.GetButtonDown("Jump")) hasJumped = true;
+        if (Input.GetButtonDown("Fire3")) GodMode = !GodMode;
     }
 
     private void FixedUpdate()
     {
-        Move();
+        if (!GodMode) Move();
+        else GodMove();
+
         changeAnimation();
     }
 
     private void Move()
     {
-        if(shieldManager.GetBlockingState()) rb.velocity = new Vector2(xDir * movementSpeed/2, rb.velocity.y);
+        if (shieldManager.GetBlockingState()) rb.velocity = new Vector2(xDir * movementSpeed / 2, rb.velocity.y);
         else rb.velocity = new Vector2(xDir * movementSpeed, rb.velocity.y);
 
         if (hasJumped && isGrounded() && shieldManager.GetShieldState() != ShieldManager.MovementState.thrown)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             hasJumped = false;
-        }    
+        }
     }
+
+    private void GodMove()
+    {
+        float xMove = xDir * movementSpeed;
+        float yMove = yDir * movementSpeed;
+        rb.velocity = new Vector2(xMove, yMove);
+    }
+
 
     private void changeAnimation()
     {
@@ -98,5 +116,8 @@ public class player_movement : MonoBehaviour
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpGround);
     }
 
+    public bool isGodMode(){
+        return GodMode;
+    }
 
 }

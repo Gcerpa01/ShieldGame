@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
+    [Header("Damage Stats")]
     [SerializeField] protected float damage;
-    private bool isAlive = true;
-
-    // public bool isAlive(){
-    //     return isAlive;
-    // }
-
-    // public void Die(){
-    //     isAlive
-    // }
 
     protected int OnTriggerEnter2D(Collider2D collision){
         // Debug.Log("Trigger detected");

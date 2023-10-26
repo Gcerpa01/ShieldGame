@@ -9,12 +9,12 @@ public class Weapon : MonoBehaviour
     public GameObject shieldPrefab;
     
     private player_movement playerMovement;
-    private ShieldManager shieldManager; // Reference to the ShieldManager script
+    private ShieldManager shieldManager; 
 
     void Start()
     {
         playerMovement = FindObjectOfType<player_movement>();
-        shieldManager = FindObjectOfType<ShieldManager>(); // Find the ShieldManager in the scene
+        shieldManager = FindObjectOfType<ShieldManager>(); 
     }
 
     // Update is called once per frame
